@@ -10,6 +10,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Welcome to Flutter',
+      theme: ThemeData(
+        primaryColor: Colors.deepPurple
+      ),
       home: RandomWords(),
     );
   }
@@ -31,7 +34,6 @@ class RandomWordsState extends State<RandomWords>{
     return Scaffold(
       appBar: AppBar(
         title: Text('Navigation List'),
-        backgroundColor: Colors.pink,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.arrow_forward),
@@ -61,7 +63,6 @@ class RandomWordsState extends State<RandomWords>{
           return Scaffold(
             appBar: AppBar(
               title: Text('Saved Suggestions'),
-              backgroundColor: Colors.pink,
             ),
             body: ListView(children: divided),
           );
