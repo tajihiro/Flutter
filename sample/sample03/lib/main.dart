@@ -45,12 +45,11 @@ class RandomWordsState extends State<RandomWords>{
   }
 
   void _pushSaved(){
-    print('Pushed!!!');
     Navigator.of(context).push(
-      MaterialPageRoute<void> (
-        builder: (BuildContext context){
-          final Iterable<ListTile> tiles = _saved.map(
-              (WordPair pair){
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) {
+            final Iterable<ListTile> tiles = _saved.map(
+                  (WordPair pair) {
                 return ListTile(
                   title: Text(
                     pair.asPascalCase,
@@ -58,17 +57,18 @@ class RandomWordsState extends State<RandomWords>{
                   ),
                 );
               },
-          );
-          final List<Widget> divided = ListTile.divideTiles(tiles: tiles, context: context).toList();
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Saved Suggestions'),
-            ),
-            body: ListView(children: divided),
-          );
-        },
-      ),
-    );
+            );
+            final List<Widget> divided = ListTile.divideTiles(
+                tiles: tiles, context: context).toList();
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Saved Suggestions'),
+              ),
+              body: ListView(children: divided),
+            );
+          },
+        ),
+      );
   }
 
   Widget _buildSuggestions(){
