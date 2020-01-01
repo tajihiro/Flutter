@@ -41,15 +41,37 @@ class _FirstPageState extends State<FirstPage> {
             Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            Container(
+              padding: EdgeInsets.all(8.0),
+              color: Colors.green,
+              width: 120,
+              height: 50,
+              child: Container(
+                color: Colors.orange,
+                transform: Matrix4.rotationZ(0.1),
+              ),
             ),
+            Image.asset('assets/images/Blowfish.png'),
+            Container(
+              padding: EdgeInsets.all(10.0),
+              width: 120,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                clipBehavior: Clip.hardEdge,
+                child: Image.asset('assets/images/tajima.jpeg'),
+              ),
+            ),
+
+
             RaisedButton(
               onPressed: (){
                 Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new SecondPage()));
               },
               child: Text('Next'),
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.display1,
             ),
           ],
         ),

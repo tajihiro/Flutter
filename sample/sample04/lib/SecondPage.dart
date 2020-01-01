@@ -13,7 +13,12 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Test'),
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go Back'),
+        )
       ),
     );
   }
