@@ -31,7 +31,8 @@ class _SecondPageState extends State<SecondPage> {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new ThirdPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ThirdPage()));
+//                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new ThirdPage()));
                   },
                   child: Text('Next'),
                 ),

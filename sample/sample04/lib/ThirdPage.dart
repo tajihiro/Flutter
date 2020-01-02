@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample04/FourthPage.dart';
 
 class ThirdPage extends StatefulWidget {
 
@@ -18,17 +19,28 @@ class _ThirdPageState extends State<ThirdPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Third Page'),
-      ),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index){
-          return ListTile(
-              title: Text(items[index])
-          );
-        }
-      )
+          appBar: AppBar(
+            title: Text('Third Page'),
+          ),
+          body: ListView.builder(
+              itemCount: items.length,
+              itemBuilder: (context, index){
+                return ListTile(
+                    title: Text(items[index])
+                );
+              }
+          ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => FourthPage()));
+//            Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new FourthPage()));
+          },
+          tooltip: 'Next',
+          icon: Icon(Icons.navigate_next),
+          label: Text('次のページへ'),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
