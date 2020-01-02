@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample04/FifthPage.dart';
 
 class FourthPage extends StatefulWidget {
 
@@ -40,10 +41,10 @@ class _FourthPageState extends State<FourthPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
-            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => FifthPage()));
           },
-          tooltip: 'Back',
-          child: Icon(Icons.arrow_back),
+          tooltip: 'Next',
+          child: Icon(Icons.arrow_forward),
         ),
     );
   }
