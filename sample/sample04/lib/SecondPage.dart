@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sample04/SeventhPage.dart';
 import 'package:sample04/ThirdPage.dart';
 
 class SecondPage extends StatefulWidget {
@@ -74,7 +75,7 @@ class _SecondPageState extends State<SecondPage> {
           ),
           Container(
             color: Colors.blueGrey,
-            height: 160,
+            height: 100,
             child: myContainer(),
           ),
           Checkbox(
@@ -102,10 +103,16 @@ class _SecondPageState extends State<SecondPage> {
               });
             },
           ),
-          RaisedButton(
-            onPressed: cupertinoModalPopup,
-            child: Text('Open Dialog'),
-          ),
+            RaisedButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SeventhPage()));
+              },
+              child: Text('Next Page'),
+            ),
+            RaisedButton(
+              onPressed: cupertinoModalPopup,
+              child: Text('Open Dialog'),
+            ),
             Text('SELECTED: ' + items[_pickerSelectedIndex]),
         ],
       ),
