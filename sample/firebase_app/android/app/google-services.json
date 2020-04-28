@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "116789196069",
+    "firebase_url": "https://blowfish-firebase.firebaseio.com",
+    "project_id": "blowfish-firebase",
+    "storage_bucket": "blowfish-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116789196069:android:0da93b9dc9bad12bec96cc",
+        "android_client_info": {
+          "package_name": "jp.co.blowfish.firebaseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116789196069-3k022fcr1o4cq71q0l9fgl77vuaj2oq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrQHvyaJ4Dn4H3sAGHjpn1jc_SpVT3sLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116789196069-3k022fcr1o4cq71q0l9fgl77vuaj2oq1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
