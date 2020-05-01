@@ -14,7 +14,7 @@ class _ListPageState extends State<ListPage> {
     return Scaffold(
       appBar: AppBar(title: Text('メンバー一覧')),
       body: StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection('members').snapshots(),
+        stream: Firestore.instance.collection('members').orderBy('number').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return new Text('Error: ${snapshot.error}');
@@ -28,7 +28,8 @@ class _ListPageState extends State<ListPage> {
                     DocumentSnapshot document) {
                   return new ListTile(
                     title: new Text(
-                        document['last_name'] + document['first_name']),
+                        document['number'].toString() + '. ' + document['last_name'] + ' ' + document['first_name']),
+                    subtitle: new Text(document.documentID),
                   );
                 }).toList(),
               );
