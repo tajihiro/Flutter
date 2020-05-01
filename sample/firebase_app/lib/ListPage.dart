@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebaseapp/RegisterPage.dart';
 import 'package:flutter/material.dart';
 
 class ListPage extends StatefulWidget {
@@ -11,7 +12,7 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('登録')),
+      appBar: AppBar(title: Text('メンバー一覧')),
       body: StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance.collection('members').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -33,6 +34,18 @@ class _ListPageState extends State<ListPage> {
               );
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context){
+                return RegisterPage();
+              }),
+          );
+        },
+        tooltip: '登録',
+        child: Icon(Icons.add),
       ),
     );
   }
