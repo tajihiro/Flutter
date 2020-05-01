@@ -1,3 +1,6 @@
+import 'package:firebaseapp/ListPage.dart';
+import 'package:firebaseapp/RegisterPage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,35 +11,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final wordsPair = 'Firebase Sample';
+    final title = 'Firebase Sample';
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Firebase Demo',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primaryColor: Colors.green,
+        accentColor: Colors.pink,
+        brightness: Brightness.light
+//        textTheme: TextTheme(
+//          headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+//          title: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+//          body1: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+//        )
+
       ),
-      home: Scaffold(
-        appBar: AppBar(title: Text(wordsPair)),
-        body: StreamBuilder<QuerySnapshot>(
-          stream: Firestore.instance.collection('members').snapshots(),
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-            if(snapshot.hasError){
-              return new Text('Error: ${snapshot.error}');
-            }
-            switch(snapshot.connectionState){
-              case ConnectionState.waiting: return new Text('Loading...');
-              default:
-                return new ListView(
-                  children: snapshot.data.documents.map((DocumentSnapshot document){
-                    return new ListTile(
-                      title: new Text(document['last_name'] + document['first_name']),
-                    );
-                  }).toList(),
-                );
-            }
-          },
-        ),
-      ),
+      home: ListPage()
     );
   }
 }
