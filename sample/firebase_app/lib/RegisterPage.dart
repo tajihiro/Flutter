@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -7,67 +8,86 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  int _counter = 0;
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController birthDateController = TextEditingController();
 
-  void _incrementCounter() {
+  void _registerMember() {
+    Firestore.instance.collection("members").add({
+      'last_name': lastNameController.text,
+      'first_name': firstNameController.text,
+      'birthdate': birthDateController.text,
+    });
+
     setState(() {
-      _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: Text('登録'),
       ),
-      body: Center(
+      body: Form(
+        key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextFormField(
+              controller: lastNameController,
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(vertical: 10),
                 border: OutlineInputBorder(),
                 filled: true,
-                icon: Icon(Icons.directions_car),
-                hintText: '車のニックネーム',
-                labelText: '車のニックネーム',
+                icon: Icon(Icons.account_circle),
+                labelText: '姓',
               ),
+              validator: (value){
+                if(value.isEmpty){
+                  return '必須です';
+                }
+                return null;
+              },
             ),
             TextFormField(
+              controller: firstNameController,
               decoration: const InputDecoration(
                   contentPadding: EdgeInsets.symmetric(vertical: 10),
                   border: OutlineInputBorder(),
                   filled: true,
-                  icon: Icon(Icons.directions_car),
-                  hintText: '現在の走行メーター(km)',
-                  labelText: '現在の走行メーター(km)'
+                  icon: Icon(Icons.account_box),
+                  labelText: '名'
               ),
+              validator: (value){
+                if(value.isEmpty){
+                  return '必須です';
+                }
+                return null;
+              },
             ),
             TextFormField(
+              controller: birthDateController,
               decoration: const InputDecoration(
                   contentPadding: EdgeInsets.symmetric(vertical: 10),
                   border: OutlineInputBorder(),
                   filled: true,
-                  icon: Icon(Icons.directions_car),
-                  hintText: '平均燃費予想',
-                  labelText: '平均燃費予想'
+                  icon: Icon(Icons.cake),
+                  labelText: '誕生日'
               ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  border: OutlineInputBorder(),
-                  filled: true,
-                  icon: Icon(Icons.directions_car),
-                  hintText: 'ガソリンタンク容量 (l)',
-                  labelText: 'ガソリンタンク容量 (l)'
-              ),
+              validator: (value){
+                if(value.isEmpty){
+                  return '必須です';
+                }
+                return null;
+              },
             ),
             new GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                print('Register!!');
+                _registerMember();
+                Navigator.pop(context);
               },
               child:
               new Container(
