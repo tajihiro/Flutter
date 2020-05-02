@@ -26,10 +26,16 @@ class _ListPageState extends State<ListPage> {
               return new ListView(
                 children: snapshot.data.documents.map((
                     DocumentSnapshot document) {
-                  return new ListTile(
-                    title: new Text(
-                        document['number'].toString() + '. ' + document['last_name'] + ' ' + document['first_name']),
-                    subtitle: new Text(document.documentID),
+                  return GestureDetector(
+                    onTap: (){
+                      print("Tapped: " + document.documentID);
+                    },
+                    child:
+                      new ListTile(
+                        title: new Text(
+                            document['number'].toString() + '. ' + document['last_name'] + ' ' + document['first_name']),
+                        subtitle: new Text(document.documentID),
+                      ),
                   );
                 }).toList(),
               );
