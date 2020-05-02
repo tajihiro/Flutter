@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebaseapp/EditPage.dart';
 import 'package:firebaseapp/RegisterPage.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('メンバー一覧')),
+      appBar: AppBar(title: Text('一覧')),
       body: StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance.collection('members').orderBy('number').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -24,11 +25,15 @@ class _ListPageState extends State<ListPage> {
               return new Text('Loading...');
             default:
               return new ListView(
-                children: snapshot.data.documents.map((
-                    DocumentSnapshot document) {
+                  children: snapshot.data.documents.map((
+                  DocumentSnapshot document) {
                   return GestureDetector(
                     onTap: (){
                       print("Tapped: " + document.documentID);
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return EditPage();
+                        }),
+                      );
                     },
                     child:
                       new ListTile(
