@@ -29,9 +29,8 @@ class _ListPageState extends State<ListPage> {
                   DocumentSnapshot document) {
                   return GestureDetector(
                     onTap: (){
-                      print("Tapped: " + document.documentID);
                       Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return EditPage();
+                          return EditPage(memberID: document.documentID,);
                         }),
                       );
                     },

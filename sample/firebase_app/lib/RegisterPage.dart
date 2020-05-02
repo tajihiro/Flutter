@@ -8,14 +8,16 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController numberController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
 
   void _registerMember() {
     Firestore.instance.collection("members").add({
+      'number': int.parse(numberController.text),
       'last_name': lastNameController.text,
       'first_name': firstNameController.text,
-    });
+    }).then((value) => print(value.documentID));
 
     setState(() {
     });
@@ -33,6 +35,22 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextFormField(
+              controller: numberController,
+              decoration: const InputDecoration(
+                contentPadding: EdgeInsets.symmetric(vertical: 10),
+                border: OutlineInputBorder(),
+                filled: true,
+                icon: Icon(Icons.account_circle),
+                labelText: 'No.',
+              ),
+              validator: (value){
+                if(value.isEmpty){
+                  return '必須です';
+                }
+                return null;
+              },
+            ),
             TextFormField(
               controller: lastNameController,
               decoration: const InputDecoration(
