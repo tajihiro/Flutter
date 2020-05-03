@@ -1,4 +1,5 @@
 import 'package:firebaseapp/ListPage.dart';
+import 'package:firebaseapp/LoginPage.dart';
 import 'package:firebaseapp/RegisterPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
 //        )
 
       ),
-      home: ListPage()
+      home: LoginPage()
     );
   }
 }
