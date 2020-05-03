@@ -1,10 +1,6 @@
-import 'package:firebaseapp/ListPage.dart';
-import 'package:firebaseapp/LoginPage.dart';
-import 'package:firebaseapp/RegisterPage.dart';
+import 'package:firebaseapp/SplashPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,7 +23,7 @@ class MyApp extends StatelessWidget {
 //        )
 
       ),
-      home: LoginPage()
+      home: SplashPage()
     );
   }
 }

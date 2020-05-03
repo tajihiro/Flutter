@@ -27,6 +27,11 @@ dependencies:
   # Added 2020/04/28 tajihiro@blowfish.co.jp
   firebase_core: ^0.4.4+3
   cloud_firestore: ^0.13.5
+  # Added 2020/05/04 tajihiro@blowfish.co.jp
+  firebase_auth: ^0.16.0
+  firebase_database: ^3.1.5
+  splashscreen: ^1.2.0
+  flutter_signin_button: ^1.0.0
 
   firebase_core_web: ^0.1.1+2
   cloud_firestore_web: ^0.1.1+2
@@ -57,6 +62,9 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  # Added 2020/04/03 tajima@blowfish.co.jp
+  assets:
+    - assets/images/splash.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
