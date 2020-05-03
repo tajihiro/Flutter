@@ -20,7 +20,8 @@ class _SplashPageState extends State<SplashPage> {
       if(response != null){
         Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ListPage()),
+          MaterialPageRoute(builder: (context) => SignInPage()),
+//          MaterialPageRoute(builder: (context) => ListPage()),
         );
       }else{
         Navigator.push(
