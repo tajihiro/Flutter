@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseapp/EditPage.dart';
 import 'package:firebaseapp/RegisterPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ListPage extends StatefulWidget {
 
@@ -35,11 +36,23 @@ class _ListPageState extends State<ListPage> {
                       );
                     },
                     child:
-                      new ListTile(
-                        title: new Text(
-                            document['number'].toString() + '. ' + document['last_name'] + ' ' + document['first_name']),
-                        subtitle: new Text(document.documentID),
-                      ),
+                        Slidable(
+                          actionPane: SlidableDrawerActionPane(),
+                          actionExtentRatio: 0.25,
+                          child: new ListTile(
+                            title: new Text(
+                                document['number'].toString() + '. ' + document['last_name'] + ' ' + document['first_name']),
+                            subtitle: new Text(document.documentID),
+                          ),
+                          secondaryActions: <Widget>[
+                            IconSlideAction(
+                              caption: '削除',
+                              color: Colors.pink,
+                              icon: Icons.delete,
+                              onTap: () {},
+                            ),
+                          ],
+                        ),
                   );
                 }).toList(),
               );
