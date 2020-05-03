@@ -11,6 +11,11 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
+
+  void _deleteMember(memberID){
+    Firestore.instance.collection('members').document(memberID).delete().then((value) => print("Deleted"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +54,9 @@ class _ListPageState extends State<ListPage> {
                               caption: '削除',
                               color: Colors.pink,
                               icon: Icons.delete,
-                              onTap: () {},
+                              onTap: () {
+                                _deleteMember(document.documentID);
+                              },
                             ),
                           ],
                         ),
