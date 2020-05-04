@@ -52,6 +52,37 @@ class _SignInPageState extends State<SignInPage> {
     });
   }
 
+  void _loginToFirebase(){
+    firebaseAuth.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text)
+        .then((result){
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage(uid: result.user.uid)),
+          );
+    }).catchError((error ){
+      print(error.message);
+      showDialog(
+          context: context,
+          builder: (BuildContext context){
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text(error.message),
+              actions: [
+                FlatButton(
+                  child: Text('OK'),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          }
+      );
+    });
+  }
+
   @override
   void initState(){
     super.initState();
