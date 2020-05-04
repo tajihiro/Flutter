@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatefulWidget {
+class AddMemberPage extends StatefulWidget {
 
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _AddMemberPageState createState() => _AddMemberPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _AddMemberPageState extends State<AddMemberPage> {
   TextEditingController numberController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();

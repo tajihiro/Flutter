@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebaseapp/ListPage.dart';
+import 'package:firebaseapp/ListMemberPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +28,7 @@ class _LogInPageState extends State<LogInPage> {
           }).then((response){
             Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => ListPage()),
+                MaterialPageRoute(builder: (context) => ListMemberPage()),
             );
           });
     }).catchError((error){

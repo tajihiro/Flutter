@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebaseapp/ListPage.dart';
+import 'package:firebaseapp/LogInPage.dart';
 import 'package:firebaseapp/SignInPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,12 +21,11 @@ class _SplashPageState extends State<SplashPage> {
         Navigator.pushReplacement(
             context,
           MaterialPageRoute(builder: (context) => SignInPage()),
-//          MaterialPageRoute(builder: (context) => ListPage()),
         );
       }else{
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SignInPage()),
+            MaterialPageRoute(builder: (context) => LogInPage()),
         );
       }
     });

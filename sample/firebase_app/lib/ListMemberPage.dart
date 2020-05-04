@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebaseapp/EditPage.dart';
-import 'package:firebaseapp/RegisterPage.dart';
+import 'package:firebaseapp/AddMemberPage.dart';
+import 'package:firebaseapp/EditMemberPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class ListPage extends StatefulWidget {
+class ListMemberPage extends StatefulWidget {
 
   @override
-  _ListPageState createState() => _ListPageState();
+  _ListMemberPageState createState() => _ListMemberPageState();
 }
 
-class _ListPageState extends State<ListPage> {
+class _ListMemberPageState extends State<ListMemberPage> {
 
   void _deleteMember(memberID){
     Firestore.instance.collection('members').document(memberID).delete().then((value) => print("Deleted"));
@@ -36,7 +36,7 @@ class _ListPageState extends State<ListPage> {
                   return GestureDetector(
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return EditPage(memberID: document.documentID,);
+                          return EditMemberPage(memberID: document.documentID,);
                         }),
                       );
                     },
@@ -71,7 +71,7 @@ class _ListPageState extends State<ListPage> {
           Navigator.push(
               context,
               MaterialPageRoute(builder: (context){
-                return RegisterPage();
+                return AddMemberPage();
               }),
           );
         },

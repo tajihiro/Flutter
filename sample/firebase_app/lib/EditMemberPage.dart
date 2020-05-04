@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class EditPage extends StatefulWidget {
+class EditMemberPage extends StatefulWidget {
   final String memberID;
 
-  EditPage({Key key, @required this.memberID});
+  EditMemberPage({Key key, @required this.memberID});
 
   @override
-  _EditPageState createState() => _EditPageState();
+  _EditMemberPageState createState() => _EditMemberPageState();
 }
 
-class _EditPageState extends State<EditPage> {
+class _EditMemberPageState extends State<EditMemberPage> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController numberController = TextEditingController();
