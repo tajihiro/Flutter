@@ -5,50 +5,47 @@ import 'package:firebaseapp/ListMemberPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatefulWidget {
+class LogInPage extends StatefulWidget {
 
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _LogInPageState createState() => _LogInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _LogInPageState extends State<LogInPage> {
   final _formKey = GlobalKey<FormState>();
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   DatabaseReference dbRef = FirebaseDatabase.instance.reference().child('members');
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  void _signInToFirebase(){
-    print('Registered to Firebase!!!');
-    firebaseAuth
-        .createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text).then((result){
-          dbRef.child(result.user.uid).set({
-            'email': emailController.text,
-          }).then((response){
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage(uid: result.user.uid)),
-            );
-          });
-    }).catchError((error){
-        showDialog(
-        context: context,
-        builder: (BuildContext context){
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text(error.message),
-            actions: [
-              FlatButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
+  void _loginToFirebase(){
+    firebaseAuth.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text)
+        .then((result){
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage(uid: result.user.uid)),
           );
-        });
+    }).catchError((error ){
+      print(error.message);
+      showDialog(
+          context: context,
+          builder: (BuildContext context){
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text(error.message),
+              actions: [
+                FlatButton(
+                  child: Text('OK'),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          }
+      );
     });
   }
 
@@ -68,7 +65,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text('Email登録'),
+        title: Text('Email'),
       ),
       body: Form(
       key: _formKey,
@@ -115,10 +112,10 @@ class _SignInPageState extends State<SignInPage> {
           color: Colors.lightBlue,
           onPressed: (){
             if(_formKey.currentState.validate()){
-              _signInToFirebase();
+              _loginToFirebase();
             }
           },
-          child: Text('登録'),
+          child: Text('ログイン'),
         )
       ],),
       ),
