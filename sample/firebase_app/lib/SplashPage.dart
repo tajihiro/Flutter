@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebaseapp/HomePage.dart';
 import 'package:firebaseapp/SelectSignInPage.dart';
-import 'package:firebaseapp/SignInPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';

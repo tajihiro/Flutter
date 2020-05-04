@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebaseapp/LogInPage.dart';
 import 'package:firebaseapp/SelectSignInPage.dart';
 import 'package:firebaseapp/SignInPage.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,16 @@ class SelectSignInPageState extends State<SelectSignInPage> {
                   color: Colors.blue
                 ),
               ),
-              onTap: (){},
+              onTap: (){
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LogInPage()),
+                );
+//                Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => LogInPage())
+//                );
+              },
               ),
             ),
           ],
