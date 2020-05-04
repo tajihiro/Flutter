@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebaseapp/LogInPage.dart';
 import 'package:firebaseapp/SigninPage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,7 +40,12 @@ class SignInPageState extends State<SignInPage> {
               child: SignInButton(
                 Buttons.Email,
                 text: 'Sign up with Email',
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LogInPage())
+                  );
+                },
               ),
             ),
             Padding(

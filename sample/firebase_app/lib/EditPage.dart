@@ -11,6 +11,8 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
+  final _formKey = GlobalKey<FormState>();
+
   TextEditingController numberController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
@@ -39,7 +41,6 @@ class _EditPageState extends State<EditPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: Text('更新'),
