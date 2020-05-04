@@ -1,83 +1,118 @@
-import 'dart:io';
-import 'package:firebaseapp/LogInPage.dart';
-import 'package:firebaseapp/SigninPage.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
-
-final FirebaseAuth _auth = FirebaseAuth.instance;
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebaseapp/ListMemberPage.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class SignInPage extends StatefulWidget {
-  final String title = 'SignIn';
+
   @override
-  State<StatefulWidget> createState() => SignInPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class SignInPageState extends State<SignInPage> {
+class _SignInPageState extends State<SignInPage> {
+  final _formKey = GlobalKey<FormState>();
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  DatabaseReference dbRef = FirebaseDatabase.instance.reference().child('members');
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  void _registerToFirebase(){
+    print('Registered to Firebase!!!');
+    firebaseAuth
+        .createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text).then((result){
+          dbRef.child(result.user.uid).set({
+            'email': emailController.text,
+          }).then((response){
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ListMemberPage()),
+            );
+          });
+    }).catchError((error){
+        showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text(error.message),
+            actions: [
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+    });
+  }
+
   @override
-  Widget build(BuildContext context) {
+  void initState(){
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Email登録'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Text('Blowfish',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    fontFamily: 'Roboto'
-                ),
+      body: Form(
+      key: _formKey,
+      child: Column(children: <Widget>[
+        Padding(
+          padding: EdgeInsets.all(20.0),
+          child: TextFormField(
+            controller: emailController,
+            decoration: InputDecoration(
+              labelText: 'Email',
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: SignInButton(
-                Buttons.Email,
-                text: 'Sign up with Email',
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LogInPage())
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: SignInButton(
-                Buttons.Google,
-                text: 'Sign up with Google',
-                onPressed: (){},
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: SignInButton(
-                Buttons.Twitter,
-                text: 'Sign up with Twitter',
-                onPressed: (){},
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: GestureDetector(
-                child: Text('Log In Useing Email',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  color: Colors.blue
-                ),
-              ),
-              onTap: (){},
-              ),
-            ),
-          ],
+            validator: (value){
+              if(value.isEmpty){
+                return 'Emailを入力してください。';
+              }else{
+                return null;
+              }
+            },
+          ),
         ),
+        Padding(
+          padding: EdgeInsets.all(20.0),
+          child: TextFormField(
+            controller: passwordController,
+            decoration: InputDecoration(
+              labelText: 'パスワード',
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
+            validator: (value){
+              if(value.isEmpty){
+                return 'パスワードを入力してください。';
+              }else{
+                return null;
+              }
+            },
+          ),
+        ),
+        RaisedButton(
+          color: Colors.lightBlue,
+          onPressed: (){
+            if(_formKey.currentState.validate()){
+              _registerToFirebase();
+            }
+          },
+          child: Text('登録'),
+        )
+      ],),
       ),
     );
   }
