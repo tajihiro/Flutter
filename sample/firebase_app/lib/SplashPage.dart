@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebaseapp/HomePage.dart';
 import 'package:firebaseapp/SelectSignInPage.dart';
 import 'package:firebaseapp/SignInPage.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,12 +21,12 @@ class _SplashPageState extends State<SplashPage> {
       if(response != null){
         Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => SelectSignInPage()),
+            MaterialPageRoute(builder: (context) => HomePage(uid: response.uid)),
         );
       }else{
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SignInPage()),
+            MaterialPageRoute(builder: (context) => SelectSignInPage()),
         );
       }
     });

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebaseapp/HomePage.dart';
 import 'package:firebaseapp/ListMemberPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _SignInPageState extends State<SignInPage> {
           }).then((response){
             Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => ListMemberPage()),
+                MaterialPageRoute(builder: (context) => HomePage(uid: result.user.uid)),
             );
           });
     }).catchError((error){
@@ -54,6 +55,13 @@ class _SignInPageState extends State<SignInPage> {
   @override
   void initState(){
     super.initState();
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
   }
 
   @override
