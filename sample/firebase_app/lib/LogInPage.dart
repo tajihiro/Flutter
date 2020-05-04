@@ -1,3 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebaseapp/ListPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,11 +12,43 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPage> {
   final _formKey = GlobalKey<FormState>();
-
-  TextEditingController nameController = TextEditingController();
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  DatabaseReference dbRef = FirebaseDatabase.instance.reference().child('members');
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   void _registerToFirebase(){
     print('Registered to Firebase!!!');
+    firebaseAuth
+        .createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text).then((result){
+          dbRef.child(result.user.uid).set({
+            'email': emailController.text,
+          }).then((response){
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ListPage()),
+            );
+          });
+    }).catchError((error){
+        showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text(error.message),
+            actions: [
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+    });
   }
 
   @override
@@ -33,20 +68,39 @@ class _LogInPageState extends State<LogInPage> {
         Padding(
           padding: EdgeInsets.all(20.0),
           child: TextFormField(
-                  controller: nameController,
-                  decoration: InputDecoration(
-                    labelText: 'Enter User Name',
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  validator: (value){
-                    if(value.isEmpty){
-                      return 'Enter Your Name!!';
-                    }else{
-                      return null;
-                    }
-                  },
+            controller: emailController,
+            decoration: InputDecoration(
+              labelText: 'Enter User Name',
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
+            validator: (value){
+              if(value.isEmpty){
+                return 'Enter Your Name!!';
+              }else{
+                return null;
+              }
+            },
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(20.0),
+          child: TextFormField(
+            controller: passwordController,
+            decoration: InputDecoration(
+              labelText: 'Enter User Password',
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
+            validator: (value){
+              if(value.isEmpty){
+                return 'Enter Your Password!!';
+              }else{
+                return null;
+              }
+            },
           ),
         ),
         RaisedButton(
