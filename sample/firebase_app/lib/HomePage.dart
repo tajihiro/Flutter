@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebaseapp/ListMemberPage.dart';
+import 'package:firebaseapp/LogInPage.dart';
+import 'package:firebaseapp/SelectSignInPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> {
               auth.signOut().then((response){
                 Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => ListMemberPage()),
+                    MaterialPageRoute(builder: (context) => LogInPage()),
                 );
               });
           },
@@ -38,7 +40,34 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Center(
-          child: Text('HOME')
+        child: Column(
+          children: <Widget>[
+            Text('HOME'),
+            new GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return ListMemberPage();
+                }),
+                );
+              },
+              child:
+              new Container(
+                height: 54.00,
+                width: 311.00,
+                child: new Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('更新'),
+                    ]
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xffffa031),borderRadius: BorderRadius.circular(27.00),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -82,5 +111,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 }

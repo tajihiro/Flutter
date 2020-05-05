@@ -24,9 +24,9 @@ class _SignInPageState extends State<SignInPage> {
         .createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text).then((result){
-          dbRef.child(result.user.uid).set({
-            'email': emailController.text,
-          }).then((response){
+            dbRef.child(result.user.uid).set({
+              'email': emailController.text,
+            }).then((response){
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => HomePage(uid: result.user.uid)),
