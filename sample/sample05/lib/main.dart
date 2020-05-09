@@ -6,26 +6,31 @@ void main() {
       home: Scaffold(
         backgroundColor: Colors.deepPurple[50],
         appBar: AppBar(
-          title: Text('Sample05'),
+          title: Text('石田ゆり子'),
           backgroundColor: Colors.purple[800],
         ),
-        body: Center(
-          child: Column(children: [
+        body: ListView(children: <Widget>[
+          Column(children: [
             Image(
-              image:
-                  NetworkImage('https://f4.bcbits.com/img/a4259120173_16.jpg'),
-              width: 300.0,
+              image: NetworkImage(
+                  'https://lagcapa.org/wp-content/uploads/2019/06/WS001177.jpg'),
+              width: 250.0,
             ),
             Image(
               image: AssetImage('images/blowfish.png'),
               width: 300.0,
+            ),
+            Image(
+              image: NetworkImage(
+                  'https://gendai.ismcdn.jp/mwimgs/3/a/-/img_3a566cac392aebdf5b3bcdfe10fe3113101518.jpg'),
+              width: 250.0,
             ),
             Image.asset(
               'images/blowfish.png',
               width: 300.0,
             ),
           ]),
-        ),
+        ]),
       ),
     ),
   );
