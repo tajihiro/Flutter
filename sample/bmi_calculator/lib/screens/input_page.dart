@@ -1,6 +1,10 @@
+import 'package:bmicalculator/calculator_brain.dart';
+import 'package:bmicalculator/components/bottom_button.dart';
 import 'package:bmicalculator/constants.dart';
-import 'package:bmicalculator/icon_contents.dart';
-import 'package:bmicalculator/reuseable_card.dart';
+import 'package:bmicalculator/components/icon_contents.dart';
+import 'package:bmicalculator/components/reuseable_card.dart';
+import 'package:bmicalculator/components/round_icon_button.dart';
+import 'package:bmicalculator/screens/result_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -227,37 +231,26 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomBarColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomBarHeight,
+          BottomButton(
+            buttonTitle: 'CALCULATE',
+            onTap: () {
+              CalculatorBrain brain =
+                  CalculatorBrain(height: height, weight: weight);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultPage(
+                    bmiResult: brain.calculateBMI(),
+                    resultText: brain.getResult(),
+                    interpretation: brain.getInterpretation(),
+                  ),
+                ),
+              );
+
+//              Navigator.pushNamed(context, '/result');
+            },
           )
         ],
-      ),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({@required this.icon, @required this.onPressed});
-  final IconData icon;
-  final Function onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(
-        icon,
-        color: Colors.white,
-      ),
-      onPressed: onPressed,
-      elevation: 6.0,
-      shape: CircleBorder(),
-      fillColor: Colors.indigoAccent,
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
       ),
     );
   }
