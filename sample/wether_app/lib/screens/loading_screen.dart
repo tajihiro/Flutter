@@ -4,8 +4,7 @@ import 'package:wetherapp/services/location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wetherapp/services/networking.dart';
-
-const apiKey = '39a96683d8f5234c44132fb88c17c5b9';
+import 'package:wetherapp/services/weather.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -20,14 +19,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void getLocationData() async {
-    Location location = Location();
-    await location.getCurrentLocation();
-
-    NetworkHelper networkHelper = NetworkHelper(
-        url:
-            'https://samples.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey');
-    var weatherData = await networkHelper.getData();
-
+    var weatherData = await WeatherModel().getLocationWeather();
     Navigator.push(
       context,
       MaterialPageRoute(
