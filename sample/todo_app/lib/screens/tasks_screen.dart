@@ -1,10 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todoapp/models/task.dart';
 import 'package:todoapp/screens/add_task_screen.dart';
 import 'package:todoapp/widgets/tasks_list.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  TasksScreen({this.addTaskCallback});
+  final Function addTaskCallback;
+
   @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  @override
+  List<Task> tasks = [
+    Task(name: 'Buy Milk.'),
+    Task(name: 'Buy Cokkies.'),
+    Task(name: 'Buy Eggs.'),
+  ];
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.indigo,
@@ -14,7 +29,14 @@ class TasksScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskScreen(),
+            builder: (context) => AddTaskScreen((newTaskTitle) {
+              setState(() {
+                tasks.add(
+                  Task(name: newTaskTitle, isDone: false),
+                );
+              });
+              print(newTaskTitle);
+            }),
           );
         },
       ),
@@ -66,7 +88,9 @@ class TasksScreen extends StatelessWidget {
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0),
                   )),
-              child: TasksList(),
+              child: TasksList(
+                tasks: tasks,
+              ),
             ),
           )
         ],
