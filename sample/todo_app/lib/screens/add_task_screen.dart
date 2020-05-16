@@ -38,11 +38,9 @@ class AddTaskScreen extends StatelessWidget {
             TextField(
               onChanged: (newValue) {
                 newTaskTitle = newValue;
-                print(newValue);
               },
               autofocus: true,
               textAlign: TextAlign.center,
-              decoration: InputDecoration(),
             ),
             FlatButton(
               child: Text(
@@ -54,7 +52,6 @@ class AddTaskScreen extends StatelessWidget {
               color: Color(0xFF475FC1),
               onPressed: () {
                 print(newTaskTitle);
-                final task = Task(name: newTaskTitle);
 //                context.read<TaskData>().addTask(newTaskTitle);
                 Provider.of<TaskData>(context).addTask(newTaskTitle);
                 Navigator.pop(context);
