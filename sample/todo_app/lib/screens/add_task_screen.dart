@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoapp/models/task.dart';
+import 'package:todoapp/models/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  AddTaskScreen(this.addTaskCallback);
-  final Function addTaskCallback;
-
-  String newTaskTitle;
-
   @override
   Widget build(BuildContext context) {
+    String newTaskTitle;
+
     return Container(
       color: Color(0xFF757575),
       child: Container(
@@ -36,8 +36,9 @@ class AddTaskScreen extends StatelessWidget {
               ),
             ),
             TextField(
-              onChanged: (value) {
-                newTaskTitle = value;
+              onChanged: (newValue) {
+                newTaskTitle = newValue;
+                print(newValue);
               },
               autofocus: true,
               textAlign: TextAlign.center,
@@ -52,7 +53,11 @@ class AddTaskScreen extends StatelessWidget {
               ),
               color: Color(0xFF475FC1),
               onPressed: () {
-                addTaskCallback(newTaskTitle);
+                print(newTaskTitle);
+                final task = Task(name: newTaskTitle);
+//                context.read<TaskData>().addTask(newTaskTitle);
+                Provider.of<TaskData>(context).addTask(newTaskTitle);
+                Navigator.pop(context);
               },
             ),
           ],
